@@ -2,6 +2,6 @@
 source "https://rubygems.org"
 
 gem 'rack'
-gem 'codebreaker',
+gem 'codebreaker', git: 'https://github.com/SviridovSV/codebreaker', branch: "dev"
 
 # gem "rails"
