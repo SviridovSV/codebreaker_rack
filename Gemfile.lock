@@ -1,11 +1,21 @@
+GIT
+  remote: https://github.com/SviridovSV/codebreaker
+  revision: ccf811c656f8011b587d78afa7a0c9a7c052d16d
+  branch: dev
+  specs:
+    codebreaker (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
+    rack (2.0.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  codebreaker!
+  rack
 
 BUNDLED WITH
    1.15.1

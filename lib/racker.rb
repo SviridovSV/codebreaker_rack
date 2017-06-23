@@ -1,5 +1,6 @@
 require 'erb'
 require 'codebreaker'
+require 'yaml'
 
 class Racker
   def self.call(env)
@@ -19,10 +20,14 @@ class Racker
       when '/new_game' then init_game(true)
       when '/check_input' then check
       when '/show_hint' then show_hint
+      when '/save_result' then save_result
+    else
+      Rack::Response.new('Not Found', 404)
+    end
   end
 
   def index
-    Rack::Response.new(render('index.html.erb')
+    Rack::Response.new(render('index.html.erb'))
   end
 
   def check
@@ -42,8 +47,32 @@ class Racker
     end
   end
 
-  def show_hint
+  def hint
+    @request.cookies["hint"]
+  end
 
+  def show_hint
+    Rack::Response.new do |response|
+      response.set_cookie("hint", @game.hint_answer)
+      response.redirect("/")
+    end
+  end
+
+  def save_result
+    name = @request.params["name"]
+    File.open("score.yml", 'a') { |f| f.write(YAML.dump("#{name}; #{Codebreaker::Game::ATTEMPT_NUMBER - @game.available_attempts}; #{Time.now.strftime("%d-%m-%Y %R")};")) }
+    Rack::Response.new do |response|
+      response.redirect("/")
+    end
+  end
+
+  def load_score
+    file = File.open('score.yml')
+    saved_score = []
+    score = YAML::load_documents(file) do |doc|
+      saved_score.push  doc.split(";")
+    end
+    saved_score
   end
 
   def guesses
@@ -68,10 +97,16 @@ class Racker
     else
       @request.session[:game] ||= prepare_game
     end
+  end
 
-    def prepare_game
-      game = Codebreaker::Game.new
-      game.start
-    end
+  def prepare_game
+    game = Codebreaker::Game.new
+    game.start
+  end
+
+
+  def render(template)
+    path = File.expand_path("../views/#{template}", __FILE__)
+    ERB.new(File.read(path)).result(binding)
   end
 end
