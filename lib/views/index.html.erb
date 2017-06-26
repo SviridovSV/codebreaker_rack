@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>CodeBreaker</title>
     <link rel="stylesheet" href="/stylesheets/application.css" type="text/css">
     <link rel="stylesheet" href="/stylesheets/bootstrap.css" type="text/css">
@@ -8,6 +10,50 @@
   <body>
   <div id="container">
     <h1>Welcome to Codebreaker Game</h1>
+
+    <div class="column">
+      <% unless @agree_to_save %>
+        <% if @win_game %>
+          <div> Congratulations! You won! </div>
+        <% else %>
+          <% if no_attempts? %>
+            <div> You don't have attempts.<br> Game over!</div>
+          <% else %>
+            <div class="guess"> Enter your guess:</div>
+            <form class="guess1" method="post" action="/check_input">
+              <input class="input" name="guess" type="text">
+              <input class="btn" type="submit" value="Submit">
+            </form>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <form class="new-game" method="post" action="/new_game">
+        <input class="btn" type="submit" value="New game">
+      </form>
+
+      <div class="table1">
+        <% if guesses && results %>
+          <table class="table-game">
+            <% guesses.each_with_index do |guess, i| %>
+              <tr>
+                <td>Guess:</td>
+                <td><%= guess %></td>
+                <td>Result:</td>
+                <td><%= results[i] %></td>
+              </tr>
+            <% end %>
+          </table>
+        <% end %>
+
+        <% if (@win_game || no_attempts?) && !@agree_to_save %>
+          <form class="save" method="post" action="/save_result">
+            <input class="input" name="name" type="text">
+            <input class="btn" type="submit" value="Save result">
+          </form>
+        <% end %>
+      </div>
+    </div>
   </div>
   </body>
 </html>

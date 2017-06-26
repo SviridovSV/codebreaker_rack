@@ -1,7 +1,6 @@
 require './lib/racker'
 
 app = Rack::Builder.new do
-  use Rack::Reloader
   use Rack::Static, :urls => ["/stylesheets"], :root => "public"
   use Rack::Session::Cookie, :key => 'rack.session',
                              :secret => 'secret'
