@@ -80,7 +80,7 @@ class Controller
   end
 
   def load_score
-    file = File.open('score.yml')
+    file = File.open('score.yml', 'a')
     saved_score = []
     score = YAML::load_documents(file) do |doc|
       saved_score.push  doc.split(";")
