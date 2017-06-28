@@ -1,9 +1,3 @@
-GIT
-  remote: https://github.com/SviridovSV/codebreaker
-  revision: c2c2f079519ac76c0366e71dd9e1c4e611f94728
-  specs:
-    codebreaker (0.1.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -47,18 +41,19 @@ GEM
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-progressbar (1.8.1)
     slop (3.6.0)
+    sv_codebreaker (0.2.0)
     unicode-display_width (1.3.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  codebreaker!
   pry
   rack
   rack-test
   rspec
   rubocop
+  sv_codebreaker
 
 BUNDLED WITH
    1.15.1

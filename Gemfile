@@ -2,7 +2,7 @@
 source "https://rubygems.org"
 
 gem 'rack'
-gem 'codebreaker', git: 'https://github.com/SviridovSV/codebreaker'
+gem 'sv_codebreaker'
 
 group :development do
   gem 'pry'
