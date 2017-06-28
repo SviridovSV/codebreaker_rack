@@ -84,7 +84,8 @@ class Controller
     if File.exist?('score.yml')
       file = File.open('score.yml')
       score = YAML::load_documents(file) do |doc|
-      saved_score.push  doc.split(";")
+        saved_score.push  doc.split(";")
+      end
     end
     saved_score
   end
