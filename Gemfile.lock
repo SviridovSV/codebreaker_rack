@@ -1,7 +1,6 @@
 GIT
   remote: https://github.com/SviridovSV/codebreaker
-  revision: 47338e0c5a95a95979b3a9b44eb9865e82a63518
-  branch: dev2
+  revision: c2c2f079519ac76c0366e71dd9e1c4e611f94728
   specs:
     codebreaker (0.1.0)
 
