@@ -1,7 +1,6 @@
 require 'erb'
 require 'yaml'
 require 'codebreaker'
-require 'pry'
 require_relative './helper'
 
 class Controller
