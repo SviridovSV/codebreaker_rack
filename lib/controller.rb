@@ -2,8 +2,10 @@ require 'erb'
 require 'yaml'
 require 'codebreaker'
 require 'pry'
+require_relative './helper'
 
 class Controller
+  include Helper
   attr_accessor :game, :sid, :sessions, :request
   attr_reader :agree_to_save
   DATABASE = 'sessions_data.yaml'
@@ -58,10 +60,6 @@ class Controller
     end
   end
 
-  def hint
-    @request.cookies["hint"]
-  end
-
   def new_game
     @game = Codebreaker::Game.new
     save_game
@@ -82,10 +80,6 @@ class Controller
     end
   end
 
-  def condition_for_save
-    (win? || @game.available_attempts.zero?) && !agree_to_save
-  end
-
   def load_score
     file = File.open('score.yml')
     saved_score = []
@@ -93,10 +87,6 @@ class Controller
       saved_score.push  doc.split(";")
     end
     saved_score
-  end
-
-  def win?
-    @results.last == '++++'
   end
 
   private
