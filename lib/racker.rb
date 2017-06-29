@@ -19,7 +19,7 @@ class Racker
     when '/show_hint' then game_do.show_hint
     when '/new_game' then game_do.new_game
     when '/save_result' then game_do.save_result
-
+    else game_do.not_found
     end
   end
 end

@@ -90,6 +90,10 @@ class Controller
     saved_score
   end
 
+  def not_found
+    Rack::Response.new('Not Found', 404)
+  end
+
   private
 
   def guesses
