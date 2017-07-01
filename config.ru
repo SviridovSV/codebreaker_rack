@@ -1,4 +1,4 @@
-require './lib/racker'
+require_relative './lib/racker'
 
 app = Rack::Builder.new do
   use Rack::Reloader, 0

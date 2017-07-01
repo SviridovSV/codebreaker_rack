@@ -1,6 +1,0 @@
----
-61c170e56baf4f2bee9905eb27fad701e1da826f0d7afb3f20d06603d60d9d2b: !ruby/object:Codebreaker::Game
-  hint: true
-  available_attempts: 5
-  result: "++++"
-  secret_code: '2345'
