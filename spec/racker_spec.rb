@@ -1,4 +1,3 @@
-
 require 'rack/test'
 require_relative '../lib/racker'
 
@@ -6,7 +5,10 @@ describe Racker do
   include Rack::Test::Methods
 
   context '/' do
-    let(:env) { { 'REQUEST_METHOD' => 'GET', 'PATH_INFO' => '/', 'rack.session' =>  { 'session_id' => 'test' } } }
+    let(:env) { { 'REQUEST_METHOD' => 'GET',
+                  'PATH_INFO' => '/',
+                  'rack.session' =>  { 'session_id' => 'test' }
+              } }
     let(:app) { Racker.new(env) }
     let(:response) { Racker.call(env) }
     let(:status)   { response[0] }
@@ -17,7 +19,11 @@ describe Racker do
   end
 
   context '/check_input' do
-    let(:env) { { 'REQUEST_METHOD' => 'POST', 'PATH_INFO' => '/check_input', 'rack.input' => StringIO.new, 'rack.session' =>  { 'session_id' => 'test' } } }
+    let(:env) { { 'REQUEST_METHOD' => 'POST',
+                  'PATH_INFO' => '/check_input',
+                  'rack.input' => StringIO.new,
+                  'rack.session' =>  { 'session_id' => 'test' }
+              } }
     let(:app) { Racker.new(env) }
     let(:response) { Racker.call(env) }
     let(:status)   { response[0] }
@@ -32,7 +38,10 @@ describe Racker do
   end
 
   context '/show_hint' do
-    let(:env) { { 'REQUEST_METHOD' => 'GET', 'PATH_INFO' => '/show_hint', 'rack.session' =>  { 'session_id' => 'test' } } }
+    let(:env) { { 'REQUEST_METHOD' => 'GET',
+                  'PATH_INFO' => '/show_hint',
+                  'rack.session' =>  { 'session_id' => 'test' }
+              } }
     let(:app) { Racker.new(env) }
     let(:response) { Racker.call(env) }
     let(:status)   { response[0] }
@@ -47,7 +56,10 @@ describe Racker do
   end
 
   context '/new_game' do
-    let(:env) { { 'REQUEST_METHOD' => 'GET', 'PATH_INFO' => '/new_game', 'rack.session' =>  { 'session_id' => 'test' } } }
+    let(:env) { { 'REQUEST_METHOD' => 'GET',
+                  'PATH_INFO' => '/new_game',
+                  'rack.session' =>  { 'session_id' => 'test' }
+              } }
     let(:app) { Racker.new(env) }
     let(:response) { Racker.call(env) }
     let(:status)   { response[0] }
@@ -62,7 +74,11 @@ describe Racker do
   end
 
   context '/save_result' do
-    let(:env) { { 'REQUEST_METHOD' => 'POST', 'PATH_INFO' => '/save_result', 'rack.input' => StringIO.new, 'rack.session' => { 'session_id' => 'test' } } }
+    let(:env) { { 'REQUEST_METHOD' => 'POST',
+                  'PATH_INFO' => '/save_result',
+                  'rack.input' => StringIO.new,
+                  'rack.session' => { 'session_id' => 'test' }
+              } }
     let(:response) { Racker.call(env) }
     let(:status)   { response[0] }
 

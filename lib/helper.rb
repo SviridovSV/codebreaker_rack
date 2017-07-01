@@ -1,6 +1,6 @@
 module Helper
   def hint
-    @request.cookies["hint"]
+    @request.cookies['hint']
   end
 
   def condition_for_save
@@ -10,4 +10,5 @@ module Helper
   def win?
     @results.last == '++++'
   end
+
 end

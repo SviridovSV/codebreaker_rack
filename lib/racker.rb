@@ -22,4 +22,5 @@ class Racker
     else game_do.not_found
     end
   end
+
 end

@@ -29,17 +29,17 @@ class Controller
   def check
     res = game.check_input(request.params['guess'])
     save_game
-    unless request.params["guess"] == ""
+    unless request.params['guess'] == ''
       res.empty? ? @results.push('mishit') : @results.push(res)
       @guesses.push(request.params['guess'])
       Rack::Response.new do |response|
-          response.set_cookie("guesses", @guesses)
-          response.set_cookie("results", @results)
-          response.redirect("/")
+          response.set_cookie('guesses', @guesses)
+          response.set_cookie('results', @results)
+          response.redirect('/')
       end
     else
       Rack::Response.new do |response|
-        response.redirect("/")
+        response.redirect('/')
       end
     end
   end
@@ -47,14 +47,14 @@ class Controller
   def show_hint
     unless game.hint
       Rack::Response.new do |response|
-        response.redirect("/")
+        response.redirect('/')
       end
     else
       h = game.hint_answer
       save_game
       Rack::Response.new do |response|
-        response.set_cookie("hint", h)
-        response.redirect("/")
+        response.set_cookie('hint', h)
+        response.redirect('/')
       end
     end
   end
@@ -63,19 +63,19 @@ class Controller
     @game = Codebreaker::Game.new
     save_game
     Rack::Response.new do |response|
-        response.set_cookie("guesses", [])
-        response.set_cookie("results", [])
-        response.set_cookie("hint", nil)
-        response.redirect("/")
+        response.set_cookie('guesses', [])
+        response.set_cookie('results', [])
+        response.set_cookie('hint', nil)
+        response.redirect('/')
     end
   end
 
   def save_result
-    name = @request.params["name"]
-    File.open("score.yml", 'a') { |f| f.write(YAML.dump("#{name}; #{Codebreaker::Game::ATTEMPT_NUMBER - game.available_attempts}; #{Time.now.strftime("%d-%m-%Y %R")};")) }
+    name = @request.params['name']
+    File.open('score.yml', 'a') { |f| f.write(YAML.dump("#{name}; #{Codebreaker::Game::ATTEMPT_NUMBER - game.available_attempts}; #{Time.now.strftime('%d-%m-%Y %R')};")) }
     @agree_to_save = true
     Rack::Response.new do |response|
-      response.redirect("/")
+      response.redirect('/')
     end
   end
 
@@ -84,7 +84,7 @@ class Controller
     if File.exist?('score.yml')
       file = File.open('score.yml')
       score = YAML::load_documents(file) do |doc|
-        saved_score.push  doc.split(";")
+        saved_score.push  doc.split(';')
       end
     end
     saved_score
