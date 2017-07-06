@@ -1,4 +1,14 @@
-# frozen_string_literal: true
+
 source "https://rubygems.org"
 
-# gem "rails"
+gem 'rack'
+gem 'sv_codebreaker'
+
+group :development do
+  gem 'pry'
+  gem 'rack-test'
+  gem 'rspec'
+  gem 'rubocop'
+end
+
+
